@@ -1,18 +1,14 @@
 package io.github.taoscode.homework;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class HomeWork01 {
     private static Integer mySum;
-    private static  InheritableThreadLocal<List<Integer>> myLocal = new InheritableThreadLocal<List<Integer>>(){
-        @Override
-        protected List initialValue() {
-            return Arrays.asList(1);
-        }
-    };
+    private static Integer myResult;
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         System.out.println("==================方法1====================");
         FutureTask<Integer> futureTask = new FutureTask<Integer>(new Callable<Integer>() {
@@ -94,29 +90,23 @@ public class HomeWork01 {
         System.out.println("异步调用返回结果9："+mySum);
         System.out.println("Main Thread End !");
         System.out.println("==================方法10====================");
-        Count5 count5 = new Count5();
-        List<Integer> list = new ArrayList<>();
-        count5.setValue(list);
-        count5.start();
-        count5.join();
-        System.out.println("异步调用返回结果10："+list.get(0));
+        WaitAndNotifyDemo waitAndNotifyDemo = new WaitAndNotifyDemo();
+        new Thread(()->{waitAndNotifyDemo.calc();}).start();
+        System.out.println("异步调用返回结果10："+waitAndNotifyDemo.getResult());
         System.out.println("Main Thread End !");
         System.out.println("==================方法11====================");
-        Count6 count6 = new Count6();
-        List<Integer> list1 = new ArrayList<>();
-        count6.setValue(list1);
-        Thread t2 = new Thread(count6);
-        t2.start();
-        t2.join();
-        System.out.println("异步调用返回结果11："+list1.get(0));
+        ForkJoinPool forkJoinPool = new ForkJoinPool(1);
+        ForkJoinTask<Integer> forkJoinTask = forkJoinPool.submit(()->{return sum();});
+        forkJoinPool.shutdown();
+        System.out.println("异步调用返回结果11："+forkJoinTask.get());
         System.out.println("Main Thread End !");
 
         System.out.println("==================方法12====================");
-        Count7 count7 = new Count7();
-        Thread t3 = new Thread(count7);
-        t3.start();
-        t3.join();
-        System.out.println("异步调用返回结果12："+mySum);
+        LockDemo lockDemo = new LockDemo();
+        new Thread(()->{
+            lockDemo.calc();
+        }).start();
+        System.out.println("异步调用返回结果12："+lockDemo.getResult());
         System.out.println("Main Thread End !");
 
         System.out.println("==================方法13====================");
@@ -134,6 +124,23 @@ public class HomeWork01 {
         count9.start();
         count9.join();
         System.out.println("异步调用返回结果14："+System.getProperty("sum"));
+        System.out.println("Main Thread End !");
+        System.out.println("==================方法15====================");
+        Semaphore semaphore = new Semaphore(0);
+        new Thread(()->{
+            myResult = sum();
+            semaphore.release();
+        }).start();
+        semaphore.acquire();
+        System.out.println("异步调用返回结果15："+myResult);
+        System.out.println("Main Thread End !");
+
+        System.out.println("==================方法16====================");
+        BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(1);
+        new Thread(()->{
+            queue.offer(sum());
+        }).start();
+        System.out.println("异步调用返回结果16："+queue.take());
         System.out.println("Main Thread End !");
     }
 
@@ -196,38 +203,6 @@ public class HomeWork01 {
             mySum = sum();
         }
     }
-    static class Count5 extends Thread{
-        private List<Integer> list;
-        public void setValue(List<Integer> list){
-            this.list = list;
-        }
-        @Override
-        public void run() {
-            if(this.list == null){
-                list = new ArrayList<>();
-            }
-            list.add(sum());
-        }
-    }
-    static class Count6 implements Runnable{
-        private List<Integer> list;
-        public void setValue(List<Integer> list){
-            this.list = list;
-        }
-        @Override
-        public void run() {
-            if(this.list == null){
-                list = new ArrayList<>();
-            }
-            list.add(sum());
-        }
-    }
-    static class Count7 implements Runnable{
-        @Override
-        public void run() {
-            mySum = sum();
-        }
-    }
 
     static class Count8 implements Callable{
         private List<Integer> list;
@@ -250,16 +225,52 @@ public class HomeWork01 {
             System.setProperty("sum",String.valueOf(sum()));
         }
     }
-    static class Count10 extends Thread{
-        @Override
-        public void run() {
-            System.out.println(Thread.currentThread().getName()+"---------"+myLocal.get());
-            myLocal.get().set(0,sum());
-            System.out.println(Thread.currentThread().getName()+"---------"+myLocal.get());
+    static class LockDemo{
+        final ReentrantLock lock = new ReentrantLock();
+        final Condition condition = lock.newCondition();
+        private Integer result;
+        public void calc(){
+            try{
+                lock.lock();
+                this.result = sum();
+                condition.signalAll();
+            }finally {
+                lock.unlock();
+            }
+        }
+        public Integer getResult(){
+            try{
+                lock.lock();
+                while (result == null){
+                    try {
+                        condition.await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return this.result;
+            }finally {
+                lock.unlock();
+            }
         }
     }
-
-
+    static class WaitAndNotifyDemo{
+        private Integer result;
+        public synchronized void calc(){
+            this.result = sum();
+            notifyAll();
+        }
+        public synchronized Integer getResult(){
+            while (this.result == null){
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            return this.result;
+        }
+    }
     private static int sum() {
         return fibo(36);
     }
