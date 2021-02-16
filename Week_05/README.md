@@ -32,6 +32,8 @@
 
 3. （必做）给前面课程提供的 Student/Klass/School 实现自动配置和 Starter。
 
+   [地址](https://github.com/taoscode/JAVA-01/tree/main/Week_05/SpringBoot-Demo-Starter)
+
 4. （选做）总结 Hibernate 与 MyBatis 的各方面异同点。
 
 5. （选做）学习 MyBatis-generator 的用法和原理，学会自定义 TypeHandler 处理复杂类型。
@@ -43,6 +45,8 @@
    2）使用事务，PrepareStatement 方式，批处理方式，改进上述操作。
 
    3）配置 Hikari 连接池，改进上述操作。提交代码到 Github。
+
+   [地址](https://github.com/taoscode/JAVA-01/tree/main/Week_05/SpringBoot-Demo/SpringBoot-demo/src/main/java/io/github/vencent/springbootdemo/service)
 
    附加题（可以后面上完数据库的课再考虑做）：
 
