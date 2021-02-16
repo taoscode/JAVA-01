@@ -19,11 +19,13 @@ public class Student implements Serializable, BeanNameAware, ApplicationContextA
     private String name;
     private String beanName;
     private ApplicationContext applicationContext;
-    public void init(){
+
+    public void init() {
         System.out.println("hello init method......");
     }
-    public void print(){
-        System.out.println(this.beanName+"=======applicationContext.getBeanDefinitionNames======"+String.join(",",applicationContext.getBeanDefinitionNames()));
+
+    public void print() {
+        System.out.println(this.beanName + "=======applicationContext.getBeanDefinitionNames======" + String.join(",", applicationContext.getBeanDefinitionNames()));
 
     }
 }

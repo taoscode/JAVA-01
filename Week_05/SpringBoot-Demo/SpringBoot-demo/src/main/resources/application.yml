@@ -1,0 +1,8 @@
+custom:
+  demo:
+    enabled: true
+jdbc:
+  mysql:
+    url: localhost:3306
+    username: root
+    password: 00000000

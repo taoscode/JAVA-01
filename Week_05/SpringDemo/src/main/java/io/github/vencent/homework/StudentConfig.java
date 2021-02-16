@@ -12,10 +12,12 @@ import lombok.ToString;
 public class StudentConfig {
     private int id;
     private String name;
-    public void init(){
+
+    public void init() {
         System.out.println("init method StudentConfig.......");
     }
-    public void sayHi(){
-        System.out.println("hello, my class is "+this.getClass()+" and my name is:"+name);
+
+    public void sayHi() {
+        System.out.println("hello, my class is " + this.getClass() + " and my name is:" + name);
     }
 }

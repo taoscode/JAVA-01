@@ -14,6 +14,6 @@ public class SpringDemo1 {
         liudehua.sayHi();
         StudentAnnotation vencent = context.getBean(StudentAnnotation.class);
         vencent.sayHi();
-        System.out.println(String.join(",",context.getBeanDefinitionNames()));
+        System.out.println(String.join(",", context.getBeanDefinitionNames()));
     }
 }

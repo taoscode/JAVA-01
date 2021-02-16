@@ -16,12 +16,12 @@ public class SpringDemo {
         lisi.print();
         Klass klass = context.getBean(Klass.class);
         klass.dong();
-        System.out.println("Klass对象Aop代理后的实际类型："+klass.getClass());
+        System.out.println("Klass对象Aop代理后的实际类型：" + klass.getClass());
 
 
         ISchool school = context.getBean(ISchool.class);
         System.out.println(school);
-        System.out.println("Ischool接口AOP代理后的实际类型："+school.getClass());
+        System.out.println("Ischool接口AOP代理后的实际类型：" + school.getClass());
         school.ding();
     }
 }

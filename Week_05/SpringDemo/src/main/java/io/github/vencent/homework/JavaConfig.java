@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JavaConfig {
-    @Bean(name = "liudehua" ,initMethod = "init")
-    public StudentConfig createStudent(){
-        return new StudentConfig(1001,"liudehua");
+    @Bean(name = "liudehua", initMethod = "init")
+    public StudentConfig createStudent() {
+        return new StudentConfig(1001, "liudehua");
     }
 }

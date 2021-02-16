@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "custom.demo.enabled",
+      "type": "java.lang.Boolean",
+      "description": "An bean configuration trigger.",
+      "sourceType": "io.github.vencent.CustomAutoConfiguration",
+      "defaultValue": false
+    }
+  ]
+}

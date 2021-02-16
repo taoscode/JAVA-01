@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 public class HelloBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
-        System.out.println("====>postProcessBeforeInitialization===>"+s+":"+o);
+        System.out.println("====>postProcessBeforeInitialization===>" + s + ":" + o);
         return o;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
-        System.out.println("======>postProcessAfterInitialization===>"+s+":"+o);
+        System.out.println("======>postProcessAfterInitialization===>" + s + ":" + o);
         return o;
     }
 }
