@@ -24,7 +24,7 @@
        `updatetime` bigint(20) DEFAULT NULL COMMENT '修改时间',
        PRIMARY KEY (`id`),
        UNIQUE KEY `IDX_USER_PHONE` (`phone`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户信息表';
      ~~~
 
      
@@ -40,7 +40,7 @@
        `createtime` bigint(20) DEFAULT NULL COMMENT '创建时间，时间戳',
        `updatetime` bigint(20) DEFAULT NULL COMMENT '修改时间',
        PRIMARY KEY (`id`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品信息表';
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品信息表';
      ~~~
 
      
@@ -65,7 +65,7 @@
        PRIMARY KEY (`id`),
        UNIQUE KEY `IDX_ORDER_ORDERNO` (`orderno`),
        KEY `IDX_ORDER_USERID` (`userid`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单信息表';
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单信息表';
      ~~~
 
      
@@ -89,7 +89,7 @@
        KEY `IDX_ORDER_ITME_ORDERNO` (`orderno`),
        KEY `IDX_ORDER_ITEM_USERID` (`userid`),
        KEY `IDX_ORDER_ITEM_PRODUCTID` (`productid`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单明细表';
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单明细表';
      ~~~
 
      

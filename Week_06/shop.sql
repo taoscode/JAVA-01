@@ -32,7 +32,7 @@ CREATE TABLE `T_ORDER` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_ORDER_ORDERNO` (`orderno`),
   KEY `IDX_ORDER_USERID` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单信息表';
 
 -- ----------------------------
 -- Table structure for t_order item
@@ -50,7 +50,7 @@ CREATE TABLE `T_ORDER ITEM` (
   KEY `IDX_ORDER_ITME_ORDERNO` (`orderno`),
   KEY `IDX_ORDER_ITEM_USERID` (`userid`),
   KEY `IDX_ORDER_ITEM_PRODUCTID` (`productid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单明细表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单明细表';
 
 -- ----------------------------
 -- Table structure for t_product
@@ -64,7 +64,7 @@ CREATE TABLE `T_PRODUCT` (
   `createtime` bigint(20) DEFAULT NULL COMMENT '创建时间，时间戳',
   `updatetime` bigint(20) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品信息表';
 
 -- ----------------------------
 -- Table structure for t_user
@@ -81,4 +81,4 @@ CREATE TABLE `T_USER` (
   `updatetime` bigint(20) DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `IDX_USER_PHONE` (`phone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户信息表';
