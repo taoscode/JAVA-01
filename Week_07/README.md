@@ -6,7 +6,7 @@
 
 2. （必做）按自己设计的表结构，插入100万订单模拟数据，测试不同方式的插入效率。
 
-   [连接](https://github.com/taoscode/JAVA-01/tree/main/Week_07)
+   [连接](https://github.com/taoscode/JAVA-01/tree/main/Week_07/InsertTest)
 
    测试结果：
 
