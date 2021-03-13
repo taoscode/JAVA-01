@@ -1,0 +1,18 @@
+
+multi:
+  datasource:
+    master:
+      jdbcUrl: jdbc:mysql://localhost:3316/db?serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: ''
+      driverClassName: com.mysql.cj.jdbc.Driver
+    slave:
+      jdbcUrl: jdbc:mysql://localhost:3326/db?serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: ''
+      driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    ROOT: INFO
+    io.github.vencent.multidatasource: trace
+    com.zaxxer.hikari.pool.HikariPool: debug
